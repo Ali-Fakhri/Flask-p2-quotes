@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+  {% extends "base.html" %} {% block navbar %}
+  <div class="container text-white p-4">
+    <div class="row">
+      <div class="col-md-10 mx-auto">
+        <div class="card bg-primary">
+          <div class="card-body">
+            <h5 class="card-title text-warning">Knowledge Theory</h5>
+            <div class="button_2 mb-4"></div>
+            <blockquote class="blockquote">
+              <p class="mb-0">Knowledge is power. Information is liberating. Education is the premise of progress, in every society, in every family.</p>
+              <div class="button_2 mt-4"></div>
+              <footer class="blockquote-footer c-footer">Kofi Annan</footer>
+            </blockquote>
+          </div>
+        </div>
+        <h4 class="py-3 text-center my-4 message"><i class="fas fa-arrow-up"></i> Like Quotes? .  Why Don't Share Us You're Favorite One Just Like The One You Saw Previuosly Upthere ... Come On! Express You're Self</h4>
+        <!--========== ADDING MODAL BUTTON TO POP UP MODAL BODY TO ADD QUOTE ==========-->
+        <button type="button" class="btn btn-block p-2 btn-success" data-toggle="modal" data-target="#quotemodal">
+          <i class="fas fa-plus"></i> Add New Quote</button>
+          <div class="button mt-4"></div>
+          <h5 class="py-3 text-center my-4">
+            <i class="fas fa-arrow-down"></i> Here You Are Our Quotes Saved in Our Database From Visitors Sorted Newly <i class="fas fa-arrow-down"></i>
+          </h5>
+        <!--========== ADDING MODAL BUTTON TO POP UP MODAL BODY TO ADD QUOTE ==========-->
+
+        <!--========== ADDING THE POSTS FLOWING FROM THE DATABASE ==========-->
+
+        {% for post in posts | reverse %}
+          <div class="card bg-info mt-4">
+            <div class="card-body">
+              <h5 class="card-title text-warning">{{ post.address }}</h5>
+              <div class="button_2 mb-4"></div>
+              <blockquote class="blockquote">
+                <p class="mb-0">{{ post.subject }}</p>
+                <div class="button_2 mt-4"></div>
+                <footer class="blockquote-footer c-footer">{{ post.auther }}</footer>
+              </blockquote>
+            </div>
+          </div>
+        {% endfor %}
+
+        <!--========== ADDING THE POSTS FLOWING FROM THE DATABASE ==========-->
+
+        <!--========== ADDING MODAL BODY TO POP UP MODAL BODY TO ADD QUOTE ==========-->
+        <form method="POST">
+          {{ form.hidden_tag() }}
+          <div class="modal fade" id="quotemodal" tabindex="-1" role="dialog" aria-labelledby="quotemodalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content bg-dark">
+                <div class="modal-header">
+                  {{ form.address(placeholder="Quote Title", class="w-50", required="True") }}
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-white">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  {{ form.subject(class="my_text_area", required="True") }}
+                </div>
+                {{ form.auther(placeholder="Who Said So?.", class="w-50 mr-auto ml-3 mb-3", required="True") }}
+                <div class="modal-footer">
+                  <br />
+                  {{ form.submit_add(class="btn btn-primary btn-block") }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!--========== ADDING MODAL BODY TO POP UP MODAL BODY TO ADD QUOTE ==========-->
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="{{ url_for('static', filename='js/jquery3.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/popper.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+
+</html>
